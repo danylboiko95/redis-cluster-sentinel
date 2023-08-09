@@ -1,7 +1,7 @@
 # Redis Cluster with Sentinel Setup and Probabilistic Cache Example
 useful links
 
-[redis-cluster]([url](https://blog.devops.dev/redis-cluster-and-sentinel-with-docker-from-zero-to-hero-part-iv-63ba9d196cc3))
+[redis-cluster](https://blog.devops.dev/redis-cluster-and-sentinel-with-docker-from-zero-to-hero-part-iv-63ba9d196cc3)
 
 This example demonstrates how to set up a Redis cluster with Sentinel and implement a probabilistic cache mechanism using Node.js and the `ioredis` library.
 
