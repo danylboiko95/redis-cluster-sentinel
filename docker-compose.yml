@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  redis-master:
+    image: redis:latest
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis-master.conf
+    ports:
+      - "6379:6379"
+    networks:
+      - redis-boiko
+
+  redis-slave:
+    image: redis:latest
+    ports:
+      - "6380:6379"
+    command: redis-server --slaveof redis-master 6379
+    depends_on:
+      - redis-master
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis-slave.conf
+    networks:
+      - redis-boiko
+
+  redis-sentinel:
+    image: redis:latest
+    ports:
+      - 26379:26379
+    command: redis-sentinel /usr/local/etc/redis/sentinel.conf
+    volumes:
+      - ./sentinel/sentinel.conf:/usr/local/etc/redis/sentinel.conf
+    depends_on:
+      - redis-master
+      - redis-slave
+    networks:
+      - redis-boiko
+
+networks:
+  redis-boiko:
+    driver: bridge
